@@ -1,52 +1,52 @@
 package main
 
-import "fmt"
+// import "fmt"
 
-const uSixteenBitMax float64 = 65535
-const kphMultiple float64 = 1.60934
+// const uSixteenBitMax float64 = 65535
+// const kphMultiple float64 = 1.60934
 
-type car struct {
-	gasPedal      uint16
-	brakePedal    uint16
-	steeringWhele int16
-	topSpeedKph   float64
-}
+// type car struct {
+// 	gasPedal      uint16
+// 	brakePedal    uint16
+// 	steeringWhele int16
+// 	topSpeedKph   float64
+// }
 
-func (c car) kmh() float64 {
-	return float64(c.gasPedal) * (c.topSpeedKph / uSixteenBitMax)
-}
+// func (c car) kmh() float64 {
+// 	return float64(c.gasPedal) * (c.topSpeedKph / uSixteenBitMax)
+// }
 
-func (c car) mph() float64 {
-	return float64(c.gasPedal) * (c.topSpeedKph / uSixteenBitMax / kphMultiple)
-}
+// func (c car) mph() float64 {
+// 	return float64(c.gasPedal) * (c.topSpeedKph / uSixteenBitMax / kphMultiple)
+// }
 
-func (c *car) newTopSpeed(newSpeed float64) {
-	c.topSpeedKph = newSpeed
-}
+// func (c *car) newTopSpeed(newSpeed float64) {
+// 	c.topSpeedKph = newSpeed
+// }
 
-func newerTopSpeed(c car, speed float64) car {
-	c.topSpeedKph = speed
-	return c
-}
+// func newerTopSpeed(c car, speed float64) car {
+// 	c.topSpeedKph = speed
+// 	return c
+// }
 
-func main() {
-	aCar := car{
-		gasPedal:      65000,
-		brakePedal:    0,
-		steeringWhele: 12531,
-		topSpeedKph:   225.0}
+// func main() {
+// 	aCar := car{
+// 		gasPedal:      65000,
+// 		brakePedal:    0,
+// 		steeringWhele: 12531,
+// 		topSpeedKph:   225.0}
 
-	fmt.Println(aCar.topSpeedKph)
-	fmt.Println(aCar.kmh())
-	fmt.Println(aCar.mph())
+// 	fmt.Println(aCar.topSpeedKph)
+// 	fmt.Println(aCar.kmh())
+// 	fmt.Println(aCar.mph())
 
-	//aCar.newTopSpeed(500)
-	aCar = newerTopSpeed(aCar, 500)
+// 	//aCar.newTopSpeed(500)
+// 	aCar = newerTopSpeed(aCar, 500)
 
-	fmt.Println(aCar.kmh())
-	fmt.Println(aCar.mph())
+// 	fmt.Println(aCar.kmh())
+// 	fmt.Println(aCar.mph())
 
-}
+// }
 
 // func main() {
 // 	http.HandleFunc("/", indexHandler)

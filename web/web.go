@@ -1,5 +1,43 @@
 package main
 
+import (
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+)
+
+//SitemapIndex get entire sitemap
+type SitemapIndex struct {
+	Locations []Location `xml:"sitemap"`
+}
+
+//Location ... get location tag inner text
+type Location struct {
+	Loc string `xml:"loc"`
+}
+
+func (l Location) String() string {
+	//return fmt.Sprintf(l.Loc)
+	return l.Loc
+}
+
+func main() {
+	var name string = "John"
+	fmt.Println(name)
+
+	resp, err := http.Get("https://www.washingtonpost.com/news-sitemaps/index.xml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	bytes, _ := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
+	var s SitemapIndex
+	xml.Unmarshal(bytes, &s)
+	fmt.Println(s.Locations)
+}
+
 /*
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap>
@@ -59,36 +97,3 @@ https://www.washingtonpost.com/news-sitemaps/goingoutguide.xml
 </sitemap>
 </sitemapindex>
 */
-import (
-	"encoding/xml"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-)
-
-type SitemapIndex struct {
-	Locations []Location `xml:"sitemap"`
-}
-
-type Location struct {
-	Loc string `xml:"loc"`
-}
-
-func (l Location) String() string {
-	//return fmt.Sprintf(l.Loc)
-	return l.Loc
-}
-
-func main() {
-	resp, err := http.Get("https://www.washingtonpost.com/news-sitemaps/index.xml")
-	if err != nil {
-		log.Fatal(err)
-	}
-	bytes, _ := ioutil.ReadAll(resp.Body)
-
-	resp.Body.Close()
-	var s SitemapIndex
-	xml.Unmarshal(bytes, &s)
-	fmt.Println(s.Locations)
-}
